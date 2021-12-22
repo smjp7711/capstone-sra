@@ -1,6 +1,7 @@
 from website import create_app
 import os
 import psycopg2
+import dj_database_url
 
 
 
@@ -17,6 +18,7 @@ else:
     conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 
 if __name__ == '__main__':
