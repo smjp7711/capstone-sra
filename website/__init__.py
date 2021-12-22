@@ -9,7 +9,6 @@ db = SQLAlchemy()
 DB_NAME = 'sra'
 
 
-
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'mr. worldwide'
