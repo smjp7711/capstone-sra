@@ -6,13 +6,23 @@ from flask_login import LoginManager
 
 
 db = SQLAlchemy()
-DB_NAME = 'sra'
-
 
 def create_app():
+    
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'mr. worldwide'
-    app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://postgres:123456@localhost/{DB_NAME}'
+    ENV ='prod'
+    DB_NAME = ''
+    if ENV == 'dev':
+        app.debug = True
+        DB_NAME = 'sra'
+        app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:123456@localhost/{DB_NAME}'
+        
+    else:
+        app.debug = False
+        app.config['SQLACHEMY_DATABASE_URI'] = 'postgres://mhgqtisxrnhajo:47830ca44a024943e000deda5eb86a37b84fb1e4dd79bec1cc233702ce32a99e@ec2-3-225-132-26.compute-1.amazonaws.com:5432/d3m22ojr7fksk2'
+
+    
     db.init_app(app)
 
 
@@ -37,6 +47,6 @@ def create_app():
     return app
 
 def create_database(app):
-    if not path.exists('website/' + DB_NAME):
+    if not path.exists('website/' + 'sra'):
         db.create_all(app=app)
         print('Created Database!')
