@@ -4,7 +4,6 @@ from io import TextIOWrapper
 from flask_sqlalchemy import SQLAlchemy
 from .models import Student
 import csv
-import pandas as pd
 
 views = Blueprint('views', __name__)
 

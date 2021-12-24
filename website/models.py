@@ -10,7 +10,7 @@ class User(db.Model, UserMixin):
 
 class Student(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
-    tNumber = db.Column(db.Text(), unique=True)
+    tNumber = db.Column(db.String(150), unique=True)
     firstName = db.Column(db.String(150))
     middleName = db.Column(db.String(150))
     lastName = db.Column(db.String(150))
@@ -34,10 +34,10 @@ class Student(db.Model, UserMixin):
     state = db.Column(db.String(150))
     zip = db.Column(db.String(150))
     phoneArea = db.Column(db.String(150))
-    phoneNum = db.Column(db.String(150), unique=True)
+    phoneNum = db.Column(db.String(150))
     phoneNumEx = db.Column(db.Integer)
-    email = db.Column(db.String(150), unique=True)
-    ualrEmail = db.Column(db.String(150), unique=True)
+    email = db.Column(db.String(150))
+    ualrEmail = db.Column(db.String(150))
     ethnicity = db.Column(db.String(150))
     sex = db.Column(db.String(150))
     admission = db.Column(db.String(150))
