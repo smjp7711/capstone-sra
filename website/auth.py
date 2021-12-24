@@ -33,9 +33,9 @@ def logout():
     logout_user()
     return redirect(url_for('auth.login'))
 
-@auth.route('/admin', methods=['GET', 'POST'])
+@auth.route('/sra_admin', methods=['GET', 'POST'])
 def admin():
-    return render_template("admin.html", user=current_user)
+    return render_template("sra_admin.html", user=current_user)
 
 @auth.route('/caller', methods=['GET', 'POST'])
 def caller():
