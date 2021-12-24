@@ -1,7 +1,9 @@
-from flask import Flask
+from flask import Flask, render_template, request, redirect, url_for
+from io import TextIOWrapper
 from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager
+
 
 
 
@@ -11,12 +13,11 @@ def create_app():
     
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'mr. worldwide'
-    ENV ='prod'
-    DB_NAME = ''
+    ENV ='dev'
+    
     if ENV == 'dev':
         app.debug = True
-        DB_NAME = 'sra'
-        app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:123456@localhost/{DB_NAME}'
+        app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:123456@localhost/sra'
         
     else:
         app.debug = False
@@ -43,7 +44,9 @@ def create_app():
     @login_manager.user_loader
     def load_user(id):
         return User.query.get(int(id))
-
+    
+    
+    
     return app
 
 def create_database(app):
