@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, url_for, redirect
+from flask import Blueprint, render_template, request, url_for, redirect, flash
 from flask_login import login_required, current_user
 from io import TextIOWrapper
 from flask_sqlalchemy import SQLAlchemy
@@ -27,6 +27,7 @@ def home():
             studentType=row[31])
             db.session.add(student)
             db.session.commit()
+        flash('File successfully uploaded!', category='success')
         return redirect(url_for('views.home'))
     return render_template("home.html", user=current_user)
 
