@@ -1,5 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
-from io import TextIOWrapper
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager
@@ -35,7 +34,7 @@ def create_app():
 
     from .models import User
 
-    db.create_all(app=app)
+    create_database(app)
 
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
@@ -48,3 +47,8 @@ def create_app():
     
     
     return app
+
+def create_database(app):
+    if not path.exists('website/' + 'sra'):
+        db.create_all(app=app)
+        print('Created Database!')
