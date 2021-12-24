@@ -13,7 +13,7 @@ def create_app():
     
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'mr. worldwide'
-    ENV ='dev'
+    ENV ='prod'
     
     if ENV == 'dev':
         app.debug = True
