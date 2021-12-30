@@ -13,7 +13,10 @@ def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'mr. worldwide'
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of dd8b647 (Merge branch 'main' into Adding-flask-mail)
     #Configuration of mail
     app.config['MAIL_SERVER']='smtp.sendgrid.net'
     app.config['MAIL_PORT'] = 587
@@ -26,6 +29,9 @@ def create_app():
 
     mail.init_app(app)
 
+<<<<<<< HEAD
+>>>>>>> parent of dd8b647 (Merge branch 'main' into Adding-flask-mail)
+=======
 >>>>>>> parent of dd8b647 (Merge branch 'main' into Adding-flask-mail)
     ENV ='dev'
     
