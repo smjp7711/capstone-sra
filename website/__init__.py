@@ -3,6 +3,10 @@ from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager
 
+#Adding mail variables
+from flask_mail import Mail
+mail = Mail()
+
 
 
 
@@ -11,7 +15,23 @@ db = SQLAlchemy()
 def create_app():
     
     app = Flask(__name__)
+
     app.config['SECRET_KEY'] = 'mr. worldwide'
+
+    #Configuration of mail
+    app.config['MAIL_SERVER']='smtp.sendgrid.net'
+    app.config['MAIL_PORT'] = 587
+    app.config['MAIL_USE_TLS'] = True
+    app.config['MAIL_USERNAME'] = 'apikey'
+    app.config['MAIL_PASSWORD'] = 'CannotpostKeytoGithub'
+    app.config['MAIL_USE_SSL'] = False
+    
+    
+
+    mail.init_app(app)
+
+
+
     ENV ='dev'
     
     if ENV == 'dev':
@@ -26,7 +46,7 @@ def create_app():
     db.init_app(app)
 
 
-    from .views import views
+    from .views import views, sra_admin
     from .auth import auth
     
     app.register_blueprint(views, url_prefix='/')
@@ -43,6 +63,7 @@ def create_app():
     @login_manager.user_loader
     def load_user(id):
         return User.query.get(int(id))
+
     
     
     
@@ -52,3 +73,4 @@ def create_database(app):
     if not path.exists('website/' + 'sra'):
         db.create_all(app=app)
         print('Created Database!')
+
