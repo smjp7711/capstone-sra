@@ -33,6 +33,18 @@ def logout():
     logout_user()
     return redirect(url_for('auth.login'))
 
+@auth.route('/sra_admin', methods=['GET', 'POST'])
+def admin():
+    return render_template("sra_admin.html", user=current_user)
+
+@auth.route('/caller', methods=['GET', 'POST'])
+def caller():
+    return render_template("caller.html", user=current_user)
+
+@auth.route('/root', methods=['GET', 'POST'])
+def root():
+    return render_template("root.html", user=current_user)
+
 @auth.route('/sign-up', methods=['GET', 'POST'])
 def sign_up():
     if request.method == 'POST':
