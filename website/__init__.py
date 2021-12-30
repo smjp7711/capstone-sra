@@ -17,6 +17,7 @@ def create_app():
     app = Flask(__name__)
 
     app.config['SECRET_KEY'] = 'mr. worldwide'
+
     #Configuration of mail
     app.config['MAIL_SERVER']='smtp.sendgrid.net'
     app.config['MAIL_PORT'] = 587
@@ -28,6 +29,8 @@ def create_app():
     
 
     mail.init_app(app)
+
+
 
     ENV ='dev'
     
