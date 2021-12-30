@@ -22,7 +22,7 @@ def create_app():
     app.config['MAIL_PORT'] = 587
     app.config['MAIL_USE_TLS'] = True
     app.config['MAIL_USERNAME'] = 'apikey'
-    app.config['MAIL_PASSWORD'] = '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'
+    app.config['MAIL_PASSWORD'] = 'CannotpostKeytoGithub'
     app.config['MAIL_USE_SSL'] = False
     
     
