@@ -17,11 +17,11 @@ def create_app():
     app.config['SECRET_KEY'] = 'mr. worldwide'
 
     #Configuration of mail
-    app.config['MAIL_SERVER']='smtp.sendgrid.net'
-    app.config['MAIL_PORT'] = 587
+    app.config['MAIL_SERVER']='smtp.mailtrap.io'
+    app.config['MAIL_PORT'] = 2525
+    app.config['MAIL_USERNAME'] = 'f40f6eb900261a'
+    app.config['MAIL_PASSWORD'] = 'bd39897f48161b'
     app.config['MAIL_USE_TLS'] = True
-    app.config['MAIL_USERNAME'] = 'apikey'
-    app.config['MAIL_PASSWORD'] = 'CannotpostKeytoGithub'
     app.config['MAIL_USE_SSL'] = False
     
     
