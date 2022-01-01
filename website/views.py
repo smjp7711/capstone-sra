@@ -4,6 +4,8 @@ from io import TextIOWrapper
 from flask_sqlalchemy import SQLAlchemy
 from .models import Student
 import csv
+from flask_mail import Message
+from website import mail
 
 views = Blueprint('views', __name__)
 
@@ -30,4 +32,14 @@ def home():
         flash('File successfully uploaded!', category='success')
         return redirect(url_for('views.home'))
     return render_template("home.html", user=current_user)
+
+@views.route('/sra_admin', methods=['GET', 'POST'])
+def sra_admin():
+    if request.method =='POST':
+        msg = Message("Hello", sender="sra_capstonegroup3_mrww@protonmail.com", recipients=["sjuarez@ualr.edu, nblarimore@ualr.edu"])
+        msg.body = "This is a test from our SRA_app"
+        mail.send(msg)
+        flash('Email succesfully sent!', category="success")
+  
+    return render_template("sra_admin.html", user=current_user)
 
