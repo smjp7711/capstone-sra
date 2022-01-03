@@ -11,6 +11,8 @@ views = Blueprint('views', __name__)
 
 db = SQLAlchemy()
 
+studentCounter = 0
+
 @views.route('/', methods=['GET', 'POST'])
 @login_required
 def home():
@@ -30,7 +32,7 @@ def home():
                 studentType=row[32])
                 db.session.add(student)
                 db.session.commit()
-                
+
                 importData = ImportData(tNumber=row[0], firstName=row[1], middleName=row[2], lastName=row[3], 
                 term=row[4], level=row[5], pProgram=row[6], 
                 pPname=row[7], pCollege=row[8], 
@@ -55,3 +57,25 @@ def sra_admin():
   
     return render_template("sra_admin.html", user=current_user)
 
+@views.route('/caller', methods=['POST'])
+@login_required
+
+def caller():
+    if request.method =='POST':
+        nextStudent()
+        global studentCounter
+        length = db.session.query(ImportData.tNumber).count()
+        firstName = db.session.query(ImportData.firstName).limit(length)[studentCounter]
+        lastName = db.session.query(ImportData.lastName).limit(length)[studentCounter]
+        phoneArea = db.session.query(ImportData.phoneArea).limit(length)[studentCounter]
+        phoneNum = db.session.query(ImportData.phoneNum).limit(length)[studentCounter]
+        phoneEx = db.session.query(ImportData.phoneNumEx).limit(length)[studentCounter]
+        return render_template("caller.html", user=current_user, studentFName = firstName, studentLName = lastName, studentPhoneArea = phoneArea, studentPhoneNum = phoneNum, studentPhoneEx = phoneEx)
+
+def nextStudent():
+    global studentCounter
+    studentCounter = studentCounter + 1
+
+@views.context_processor
+def context_processor():
+    return dict(key='value', nextStudent = nextStudent)
