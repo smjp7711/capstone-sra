@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, url_for, redirect, flash
 from flask_login import login_required, current_user
 from io import TextIOWrapper
 from flask_sqlalchemy import SQLAlchemy
-from .models import Student
+from .models import Student, ImportData
 import csv
 from flask_mail import Message
 from website import mail
@@ -30,6 +30,17 @@ def home():
                 studentType=row[32])
                 db.session.add(student)
                 db.session.commit()
+                
+                importData = ImportData(tNumber=row[0], firstName=row[1], middleName=row[2], lastName=row[3], 
+                term=row[4], level=row[5], pProgram=row[6], 
+                pPname=row[7], pCollege=row[8], 
+                pDept=row[9], 
+                admit=row[17], sAddress1=row[18], sAddress2=row[19], sAddress3=row[20], city=row[21], state=row[22], 
+                zip=row[23], phoneArea=row[24], phoneNum=row[25], phoneNumEx=row[26], email=row[27], ualrEmail=row[28], 
+                studentType=row[32])
+                db.session.add(importData)
+                db.session.commit()
+
         flash('File successfully uploaded!', category='success')
         return redirect(url_for('views.home'))
     return render_template("home.html", user=current_user)
