@@ -29,7 +29,7 @@ def create_app():
     mail.init_app(app)
 
 
-    ENV ='prod'
+    ENV ='dev'
     
     if ENV == 'dev':
         app.debug = True

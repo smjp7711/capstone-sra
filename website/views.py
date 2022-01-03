@@ -20,15 +20,16 @@ def home():
         csv_reader = csv.reader(csv_file, delimiter=',')
         next(csv_reader, None)
         for row in csv_reader:
-            student = Student(tNumber=row[0], firstName=row[1], middleName=row[2], lastName=row[3], 
-            term=row[4], level=row[5], pProgram=row[6], 
-            pPname=row[7], pCollege=row[8], 
-            pDept=row[9], pDeptDesc=row[10], sProgram=row[11], sPname=row[12], sCollege=row[13], sDept=row[14], 
-            sDeptDesc=row[15], decision=row[16], admit=row[17], sAddress1=row[18], sAddress2=row[19], city=row[20], state=row[21], 
-            zip=row[22], phoneArea=row[23], phoneNum=row[24], phoneNumEx=row[25], email=row[26], ualrEmail=row[27], ethnicity=row[28], sex=row[29], admission=row[30], 
-            studentType=row[31])
-            db.session.add(student)
-            db.session.commit()
+            if(row[0]!=''):
+                student = Student(tNumber=row[0], firstName=row[1], middleName=row[2], lastName=row[3], 
+                term=row[4], level=row[5], pProgram=row[6], 
+                pPname=row[7], pCollege=row[8], 
+                pDept=row[9], pDeptDesc=row[10], sProgram=row[11], sPname=row[12], sCollege=row[13], sDept=row[14], 
+                sDeptDesc=row[15], decision=row[16], admit=row[17], sAddress1=row[18], sAddress2=row[19], sAddress3=row[20], city=row[21], state=row[22], 
+                zip=row[23], phoneArea=row[24], phoneNum=row[25], phoneNumEx=row[26], email=row[27], ualrEmail=row[28], ethnicity=row[29], sex=row[30], admission=row[31], 
+                studentType=row[32])
+                db.session.add(student)
+                db.session.commit()
         flash('File successfully uploaded!', category='success')
         return redirect(url_for('views.home'))
     return render_template("home.html", user=current_user)
